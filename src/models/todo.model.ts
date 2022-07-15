@@ -2,6 +2,7 @@ import { prop, getModelForClass } from '@typegoose/typegoose';
 
 import { projectId } from '../types/project.types';
 import { userId } from '../types/user.types';
+import { CommentModel } from './comment.model';
 
 export class TodoModel {
   @prop({ required: true })
@@ -23,6 +24,12 @@ export class TodoModel {
   public isCompleted: boolean;
 
   @prop()
+  public comments?: CommentModel[];
+
+  @prop()
+  public priority?: 1 | 2 | 3 | 4;
+
+  @prop()
   public sharingUsers?: userId[];
 
   @prop()
@@ -32,7 +39,7 @@ export class TodoModel {
   public reminder?: Date;
 
   @prop()
-  public projects?: projectId[];
+  public project?: projectId;
 }
 
 export const todoModel = getModelForClass(TodoModel);
