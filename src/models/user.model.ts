@@ -15,6 +15,9 @@ export class UserModel {
 
   @prop()
   public lastName?: string;
+
+  @prop()
+  public photo?: string;
 }
 
 export const userModel = getModelForClass(UserModel);
