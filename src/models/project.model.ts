@@ -1,23 +1,28 @@
 import { prop, getModelForClass } from '@typegoose/typegoose';
-import { CommentModel } from './comment.model';
-import { TodoModel } from './todo.model';
-import { UserModel } from './user.model';
+
+import { activityId } from '../types/activity.types';
+import { commentId } from '../types/comment.types';
+import { todoId } from '../types/todo.types';
+import { userId } from '../types/user.types';
 
 export class ProjectModel {
   @prop({ required: true })
-  public uniqueId: string;
+  public projectId: string;
 
   @prop({ required: true })
-  public createdBy: UserModel;
+  public createdBy: userId;
 
   @prop()
-  public todos: TodoModel[];
+  public todos?: todoId[];
 
   @prop()
-  public sharingUsers: UserModel[];
+  public sharingUsers?: userId[];
 
   @prop()
-  public comments: CommentModel[];
+  public comments?: commentId[];
+
+  @prop()
+  public activities?: activityId[];
 }
 
 export const projectModel = getModelForClass(ProjectModel);

@@ -1,12 +1,13 @@
 import { prop, getModelForClass } from '@typegoose/typegoose';
-import { UserModel } from './user.model';
+
+import { userId } from '../types/user.types';
 
 export class CommentModel {
   @prop({ required: true })
-  public uniqueId: string;
+  public commentId: string;
 
   @prop({ required: true })
-  public createdBy: UserModel;
+  public createdBy: userId;
 
   @prop({ required: true })
   public content: string;
