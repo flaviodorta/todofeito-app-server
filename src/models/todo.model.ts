@@ -23,16 +23,16 @@ export class TodoModel {
   @prop({ required: true })
   public isCompleted: boolean;
 
-  @prop()
+  @prop({ type: () => [CommentModel] })
   public comments?: CommentModel[];
 
   @prop()
   public priority?: 1 | 2 | 3 | 4;
 
-  @prop()
+  @prop({ type: () => [String] })
   public sharingUsers?: userId[];
 
-  @prop()
+  @prop({ type: () => [String] })
   public labels?: string[];
 
   @prop()

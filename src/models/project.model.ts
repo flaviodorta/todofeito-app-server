@@ -12,16 +12,16 @@ export class ProjectModel {
   @prop({ required: true })
   public createdBy: userId;
 
-  @prop()
+  @prop({ type: () => [String] })
   public todos?: todoId[];
 
-  @prop()
+  @prop({ type: () => [String] })
   public sharingUsers?: userId[];
 
-  @prop()
+  @prop({ type: () => [CommentModel] })
   public comments?: CommentModel[];
 
-  @prop()
+  @prop({ type: () => [ActivityModel] })
   public activities?: ActivityModel[];
 }
 
