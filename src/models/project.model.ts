@@ -1,9 +1,9 @@
 import { prop, getModelForClass } from '@typegoose/typegoose';
 
-import { activityId } from '../types/activity.types';
-import { commentId } from '../types/comment.types';
 import { todoId } from '../types/todo.types';
 import { userId } from '../types/user.types';
+import { ActivityModel } from './activity.model';
+import { CommentModel } from './comment.model';
 
 export class ProjectModel {
   @prop({ required: true })
@@ -19,10 +19,10 @@ export class ProjectModel {
   public sharingUsers?: userId[];
 
   @prop()
-  public comments?: commentId[];
+  public comments?: CommentModel[];
 
   @prop()
-  public activities?: activityId[];
+  public activities?: ActivityModel[];
 }
 
 export const projectModel = getModelForClass(ProjectModel);
