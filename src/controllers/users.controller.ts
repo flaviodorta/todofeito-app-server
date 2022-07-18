@@ -1,7 +1,6 @@
 import bcrypt from 'bcrypt';
-import { randomUUID } from 'crypto';
+import { randomUUID as uuid } from 'crypto';
 import { Request, Response } from 'express';
-
 import { userModel } from '../models/user.model';
 
 class UserController {
@@ -35,10 +34,11 @@ class UserController {
 
   async createUser(req: Request, res: Response) {
     const { email, password } = req.body;
-
+    console.log(req.body);
     if (!email || !password) {
       return res.json({ error: 'All fields must be filled' });
     }
+    console.log(password);
 
     const searchUserByEmail = await userModel.findOne({ email });
 
@@ -47,16 +47,15 @@ class UserController {
     }
 
     const salt = bcrypt.genSaltSync(10);
-    const hashedPassowrd = bcrypt.hashSync(password, salt);
+    const hashedPassword = bcrypt.hashSync(password, salt);
     const newUser = new userModel({
-      userId: randomUUID(),
-      email,
-      password,
+      userId: uuid(),
+      email: email,
+      password: hashedPassword,
     });
 
     try {
       const saveUser = await newUser.save();
-
       if (saveUser) {
         return res.json({ success: 'User created successfully' });
       }
